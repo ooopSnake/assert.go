@@ -1,3 +1,3 @@
-module github.com/ooopSnake/assert
+module github.com/ooopSnake/assert.go
 
 go 1.14
