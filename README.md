@@ -30,10 +30,6 @@ import "github.com/ooopSnake/assert.go"
 
 ### direct panic
 ```go
-package your_package
-
-import "github.com/ooopSnake/assert.go"
-
 func foo(value int) error {
     assert.Must(value > 10,"value too small").Panic()
     return nil
@@ -42,10 +38,6 @@ func foo(value int) error {
 
 ### convert panic to an error
 ```go
-package your_package
-
-import "github.com/ooopSnake/assert.go"
-
 func foo(value int) error {
 	if err := assert.Must(value > 10, "value too small").Error(); err != nil {
 		return err
