@@ -15,6 +15,7 @@ type (
 		condFn  func() bool
 		msgFmt  string
 		msgArgs []interface{}
+		wrapErr error
 	}
 )
 
@@ -27,6 +28,9 @@ func (this *bang) Panic() {
 func (this *bang) Error() error {
 	if this.condFn() {
 		return nil
+	}
+	if this.wrapErr != nil {
+		return this.wrapErr
 	}
 	return errors.New(fmt.Sprintf(this.msgFmt, this.msgArgs...))
 }
@@ -54,4 +58,13 @@ func Must(cond bool, msg string) Bang {
 
 func Mustf(cond bool, format string, args ...interface{}) Bang {
 	return makeBang(cond, format, args...)
+}
+
+func NoError(err error) Bang {
+	return &bang{
+		condFn: func() bool {
+			return err == nil
+		},
+		wrapErr: err,
+	}
 }
