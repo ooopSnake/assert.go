@@ -47,6 +47,24 @@ func foo(value int) error {
 
 ```
 
+
+### assert error is nil
+
+```go
+func foo(closer io.Closer) error {
+    assert.NoError(closer.Close()).Panic()
+	return nil
+}
+
+```
+
+```go
+func foo(closer io.Closer) error {
+	return assert.NoError(closer.Close()).Error()
+}
+
+```
+
 ## License
 
 Released under the [MIT License](https://github.com/ooopSnake/assert.go/blob/master/LICENSE)
